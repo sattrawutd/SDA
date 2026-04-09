@@ -3,7 +3,22 @@
     "allow": [
       "Bash(git push:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m ':*)"
+      "Bash(git commit -m ':*)",
+      "Bash(brew list:*)",
+      "Bash(brew search:*)",
+      "Bash(brew tap:*)",
+      "Bash(HOMEBREW_ACCEPT_EULA=Y brew install mssql-tools18)",
+      "Bash(pip3 install:*)",
+      "Bash(pip install:*)",
+      "Bash(npm list:*)",
+      "Bash(npx -y mssql-cli --version)",
+      "Bash(mssql -s 10.10.10.108 -u sa -p '1q2w3e4r' -e)",
+      "Bash(npm install:*)",
+      "Bash(npm root:*)",
+      "Bash(node -e ':*)",
+      "Bash(code --install-extension ms-mssql.mssql)",
+      "Bash(mdfind \"kMDItemCFBundleIdentifier == 'com.microsoft.VSCode'\")",
+      "Bash(\"/Users/user/Library/CloudStorage/GoogleDrive-sattrawut@sala-daeng.com/My Drive/00.Downloads/Visual Studio Code.app/Contents/Resources/app/bin/code\" --install-extension ms-mssql.mssql)"
     ]
   }
 }
