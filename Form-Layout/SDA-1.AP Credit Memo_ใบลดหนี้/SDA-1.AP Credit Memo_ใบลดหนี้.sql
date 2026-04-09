@@ -1,2 +1,3 @@
 SELECT *
 FROM OINV
+INNER JOIN INV1 ON OINV."DocEntry" = INV1."DocEntry"
