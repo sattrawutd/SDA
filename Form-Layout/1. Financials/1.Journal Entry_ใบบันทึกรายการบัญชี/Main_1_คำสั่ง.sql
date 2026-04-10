@@ -1,12 +1,4 @@
-﻿-- ============================================================
--- Report: 1.Journal Entry_ใบบันทึกรายการบัญชี.rpt
-Path:   1. Financials\1.Journal Entry_ใบบันทึกรายการบัญชี.rpt
-Extracted: 2026-04-09 15:22:33
--- Source: Main Report
--- Table:  คำสั่ง
--- ============================================================
-
-SELECT DISTINCT
+﻿SELECT DISTINCT
 BRANCH.Code AS 'BranchCode' ,
 CASE WHEN BRANCH.Code = '00000' AND OJDT.FcTotal = '0' THEN N'สำนักงานใหญ่' 
   WHEN BRANCH.Code = '00000' AND OJDT.FcTotal <> '0' THEN 'Head office' 
@@ -162,6 +154,6 @@ left JOIN (select top 1 A.CardName , A.TransId
 	)AD
 
 
-WHERE OJDT.[TransId] = '{?DocKey@}'
+WHERE OJDT.[TransId] = '1'
 
-ORDER BY (T1.Line_ID+1)
+--ORDER BY (T1.Line_ID+1)
