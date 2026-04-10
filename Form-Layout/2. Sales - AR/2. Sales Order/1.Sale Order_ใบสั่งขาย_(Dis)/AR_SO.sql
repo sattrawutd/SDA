@@ -1,14 +1,6 @@
-﻿-- ============================================================
--- Report: 2.Sale Order_ใบสั่งขาย_(Dis).rpt
-Path:   2. Sales - AR\2. Sales Order\2.Sale Order_ใบสั่งขาย_(Dis).rpt
-Extracted: 2026-04-09 15:22:34
--- Source: Main Report
--- Table:  Command
--- ============================================================
-
-SELECT DISTINCT
-case when OCRD.Phone2 is null then ''
-  when OCRD.Phone2 is not null then ', ' + OCRD.Phone2
+﻿SELECT DISTINCT
+case when OCPR.Cellolar is null then ''
+  when OCPR.Cellolar is not null then OCPR.Cellolar
   END 'Phone2',
 CONCAT(OCPR.FirstName,' ',OCPR.LastName) AS 'Coontact',
 BRANCH.Code ,
@@ -79,7 +71,32 @@ ORDR.DocTotalFC,
 ORDR.DiscPrcnt As 'DiscP',
 RDR1.unitMsr,
 ORDR.Comments,
-rdr1.LineType
+rdr1.LineType,
+RDR1.project,
+OCPR.E_MailL,
+OSLP.SlpName as 'Sale Name contact',
+OSLP.Mobil as 'Mobile',
+OSLP.Email as 'Email-Sale',
+RDR12.StreetB     AS 'Street / PO Box12',
+    RDR12.StreetNoB   AS 'Street No.12',
+    RDR12.BlockB      AS 'Block12',
+    RDR12.CityB       AS 'City12',
+    RDR12.ZipCodeB    AS 'Zip Code12',
+    RDR12.CountyB     AS 'County12',
+    RDR12.StateB      AS 'State12',
+    RDR12.CountryB    AS 'Country/Region12',
+		RDR12.Streets     ,
+    RDR12.StreetNos   ,
+    RDR12.Blocks   ,
+    RDR12.Citys      ,
+    RDR12.ZipCodes   ,
+    RDR12.Countys     ,
+    RDR12.States     ,
+    RDR12.Countrys   ,
+	RDR1.U_SLD_Dis_Amount
+
+
+
 
 FROM ORDR   
 INNER JOIN RDR1 ON ORDR.DocEntry = RDR1.DocEntry 
@@ -91,14 +108,16 @@ LEFT JOIN NNM1 ON ORDR.Series = NNM1.Series
 LEFT JOIN OCTG ON ORDR.GroupNum = OCTG.GroupNum
 LEFT JOIN OSLP ON ORDR.SlpCode = OSLP.SlpCode
 LEFT JOIN OPRJ ON RDR1.PROJECT = OPRJ.PRJCODE 
+LEFT JOIN RDR12 ON ORDR.DocEntry = RDR12.DocEntry
 LEFT JOIN [dbo].[@SLDT_SET_BRANCH] BRANCH ON ORDR.U_SLD_LVatBranch = BRANCH.Code , oadm
+
 
 WHERE ORDR.DocEntry = {?DocKey@}
 
 Union all
 SELECT DISTINCT
-case when OCRD.Phone2 is null then ''
-  when OCRD.Phone2 is not null then ', ' + OCRD.Phone2
+case when OCPR.Cellolar is null then ''
+  when OCPR.Cellolar is not null then OCPR.Cellolar
   END 'Phone2',
 CONCAT(OCPR.FirstName,' ',OCPR.LastName) AS 'Coontact',
 BRANCH.Code ,
@@ -169,10 +188,34 @@ ORDR.DocTotalFC,
 ORDR.DiscPrcnt As 'DiscP',
 '' as unitMsr,
 ORDR.Comments,
-rdr10.LineType
+rdr10.LineType,
+RDR1.project,
+OCPR.E_MailL,
+OSLP.SlpName as 'Sale Name contact',
+OSLP.Mobil as 'Mobile',
+OSLP.Email as 'Email-Sale',
+RDR12.StreetB     AS 'Street / PO Box12',
+    RDR12.StreetNoB   AS 'Street No.12',
+    RDR12.BlockB      AS 'Block12',
+    RDR12.CityB       AS 'City12',
+    RDR12.ZipCodeB    AS 'Zip Code12',
+    RDR12.CountyB     AS 'County12',
+    RDR12.StateB      AS 'State12',
+    RDR12.CountryB    AS 'Country/Region12',
+	RDR12.Streets     ,
+    RDR12.StreetNos   ,
+    RDR12.Blocks   ,
+    RDR12.Citys      ,
+    RDR12.ZipCodes   ,
+    RDR12.Countys     ,
+    RDR12.States     ,
+    RDR12.Countrys   ,
+	'' as U_SLD_Dis_Amount
+
 
 FROM ORDR   
 INNER JOIN RDR10 ON ORDR.DocEntry = RDR10.DocEntry 
+INNER JOIN RDR1 ON ORDR.DocEntry = RDR1.DocEntry 
 --LEFT JOIN OITM ON RDR1.ItemCode = OITM.ItemCode 
 LEFT JOIN OCRD ON ORDR.CardCode = OCRD.CardCode
 LEFT JOIN CRD1 ON (ORDR.CardCode = CRD1.CardCode AND ORDR.PaytoCode = CRD1.[Address] AND CRD1.AdresType ='B' ) 
@@ -180,9 +223,9 @@ LEFT JOIN OCPR ON ORDR.CardCode = OCPR.CardCode AND ORDR.CntctCode = OCPR.CntctC
 LEFT JOIN NNM1 ON ORDR.Series = NNM1.Series 
 LEFT JOIN OCTG ON ORDR.GroupNum = OCTG.GroupNum
 LEFT JOIN OSLP ON ORDR.SlpCode = OSLP.SlpCode
+LEFT JOIN RDR12 ON ORDR.DocEntry = RDR12.DocEntry
 --LEFT JOIN OPRJ ON RDR1.PROJECT = OPRJ.PRJCODE 
 LEFT JOIN [dbo].[@SLDT_SET_BRANCH] BRANCH ON ORDR.U_SLD_LVatBranch = BRANCH.Code , oadm
 
 WHERE ORDR.DocEntry = {?DocKey@}
 Order by 'No.' , 'Line No.'
-
