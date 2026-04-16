@@ -26,7 +26,8 @@
       "Bash(cp \"C:/SDAWR/SDA/Form-Layout/3. Purchasing - AP/8. AP Credit Memo/1.AP Credit Memo_ใบลดหนี้/HAddress.sql\" \"C:/SDAWR/SDA/backup-before-pull/8. AP Credit Memo/\")",
       "Read(//c/SDAWR/SDA/backup-before-pull/6. AP Down Payment Invoice/**)",
       "Read(//c/SDAWR/SDA/backup-before-pull/8. AP Credit Memo/**)",
-      "Bash(tasklist)"
+      "Bash(tasklist)",
+      "Bash(git checkout:*)"
     ]
   }
 }
