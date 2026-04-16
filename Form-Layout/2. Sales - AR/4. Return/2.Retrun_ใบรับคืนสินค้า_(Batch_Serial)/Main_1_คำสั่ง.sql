@@ -28,6 +28,8 @@ OCRD.U_SLD_Title,
 OCRD.U_SLD_FullName,
 OCRD.LicTradNum ,
 OPRJ.PrjCode,
+ORDN.U_SLD_Returnreason ,
+ORDN.U_SLD_ReturnTo ,
 CASE 
   WHEN CRD1.GlblLocNum IS NULL THEN ''
   WHEN CRD1.GlblLocNum = '00000' THEN N'(สำนักงานใหญ่)'
