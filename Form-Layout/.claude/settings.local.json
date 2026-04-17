@@ -27,7 +27,11 @@
       "Read(//c/SDAWR/SDA/backup-before-pull/6. AP Down Payment Invoice/**)",
       "Read(//c/SDAWR/SDA/backup-before-pull/8. AP Credit Memo/**)",
       "Bash(tasklist)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(git ls-tree *)",
+      "Bash(grep -iE \"PQ|\\\\.prt$\")",
+      "Bash(git -c core.quotepath=false ls-tree -r 6342564e9deee6331d7140772e36b2eaa9cd3a8f --name-only)",
+      "Bash(git *)"
     ]
   }
 }
