@@ -1,5 +1,5 @@
-SELECT
-    TOP 1 PDN10.LineText
-FROM PDN1
-INNER JOIN PDN10 ON PDN1.[DocEntry] = PDN10.[DocEntry] AND PDN10.AftLineNum = {?lineNum@}
-WHERE PDN1.[DocEntry] = {?DocKey@}
+SELECT [LineText]
+FROM PDN10
+WHERE [DocEntry] = {?DocKey@}
+  AND [AftLineNum] = {?lineNum@}
+ORDER BY [LineSeq] ASC

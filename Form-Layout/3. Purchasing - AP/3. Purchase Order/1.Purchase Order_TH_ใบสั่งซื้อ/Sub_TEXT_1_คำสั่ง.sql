@@ -1,5 +1,5 @@
-SELECT
-    TOP 1 POR10.LineText
-FROM POR1
-INNER JOIN POR10 ON POR1.[DocEntry] = POR10.[DocEntry] AND POR10.AftLineNum = {?lineNum@}
-WHERE POR1.[DocEntry] = {?DocKey@}
+SELECT [LineText]
+FROM POR10
+WHERE [DocEntry] = {?DocKey@}
+  AND [AftLineNum] = {?lineNum@}
+ORDER BY [LineSeq] ASC

@@ -1,5 +1,5 @@
-SELECT
-    TOP 1 WTQ10.LineText
-FROM WTQ1
-INNER JOIN WTQ10 ON WTQ1.[DocEntry] = WTQ10.[DocEntry] AND WTQ10.AftLineNum = {?lineNum@}
-WHERE WTQ1.[DocEntry] = {?DocKey@}
+SELECT [LineText]
+FROM WTQ10
+WHERE [DocEntry] = {?DocKey@}
+  AND [AftLineNum] = {?lineNum@}
+ORDER BY [LineSeq] ASC
