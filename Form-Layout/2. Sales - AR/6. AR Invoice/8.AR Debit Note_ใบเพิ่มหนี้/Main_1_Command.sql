@@ -1,12 +1,4 @@
-﻿-- ============================================================
--- Report: 8.AR Debit Note_ใบเพิ่มหนี้.rpt
-Path:   2. Sales - AR\6. AR Invoice\8.AR Debit Note_ใบเพิ่มหนี้.rpt
-Extracted: 2026-04-09 15:22:40
--- Source: Main Report
--- Table:  Command
--- ============================================================
-
-SELECT DISTINCT
+﻿SELECT DISTINCT
 CONCAT(OCPR.FirstName,' ',OCPR.LastName) AS 'Coontact',
 BRANCH.Code ,
 CASE WHEN BRANCH.Code = '00000' AND OINV.DocCur = OADM.MainCurncy THEN N'สำนักงานใหญ่' 
@@ -106,7 +98,7 @@ LEFT JOIN OPRJ ON INV1.Project = OPRJ.PrjCode
 Left join [dbo].[@SLD_REASON_DBNOTE] T10 on OINV.U_DB_01 = T10.code
 LEFT JOIN [dbo].[@SLDT_SET_BRANCH] BRANCH ON OINV.U_SLD_LVatBranch = BRANCH.Code , oadm
 
-WHERE OINV.DocEntry = {?DocKey@}
+WHERE OINV.DocEntry = 1
 
 Order by 'No.' , 'Line No.'
 

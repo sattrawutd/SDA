@@ -1,12 +1,4 @@
-﻿-- ============================================================
--- Report: 3.Tax Invoice_ใบกำกับภาษี.rpt
-Path:   2. Sales - AR\6. AR Invoice\3.Tax Invoice_ใบกำกับภาษี.rpt
-Extracted: 2026-04-09 15:22:37
--- Source: Main Report
--- Table:  Command
--- ============================================================
-
-SELECT DISTINCT
+﻿SELECT DISTINCT
 CONCAT(OCPR.FirstName,' ',OCPR.LastName) AS 'Coontact',
 BRANCH.Code ,
 CASE WHEN BRANCH.Code = '00000' AND OINV.DocCur = OADM.MainCurncy THEN N'สำนักงานใหญ่' 
@@ -80,10 +72,22 @@ OINV.DiscPrcnt As 'DiscP',
 INV1.LineType
 ,OINV.Printed
 ,OINV.Address2
-,OSLP.SlpName
+,OSLP.SlpName,
+INV1.Project,
+OCPR.Name,
+OCPR.Tel1,
+OCPR.E_MailL,
+INV12.StreetB,
+INV12.StreetNoB,
+INV12.BlockB,
+INV12.CityB,
+INV12.ZipCodeB,
+INV12.CountyB,
+INV12.CountryB
 
 FROM OINV
 inner JOIN INV1 ON OINV.DocEntry = INV1.DocEntry
+inner JOIN INV12 ON OINV.DocEntry = INV12.DocEntry
 Left JOIN NNM1 ON OINV.Series = NNM1.Series 
 Left JOIN OCRD ON OINV.CardCode = OCRD.CardCode 
 LEFT JOIN OCPR ON OINV.CntctCode = OCPR.CntctCode

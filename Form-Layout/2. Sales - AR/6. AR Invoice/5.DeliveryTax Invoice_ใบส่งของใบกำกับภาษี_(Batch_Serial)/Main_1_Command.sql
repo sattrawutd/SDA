@@ -1,12 +1,4 @@
-﻿-- ============================================================
--- Report: 5.DeliveryTax Invoice_ใบส่งของใบกำกับภาษี_(Batch_Serial).rpt
-Path:   2. Sales - AR\6. AR Invoice\5.DeliveryTax Invoice_ใบส่งของใบกำกับภาษี_(Batch_Serial).rpt
-Extracted: 2026-04-09 15:22:39
--- Source: Main Report
--- Table:  Command
--- ============================================================
-
-SELECT DISTINCT
+﻿SELECT DISTINCT
 CONCAT(OCPR.FirstName,' ',OCPR.LastName) AS 'Coontact',
 BRANCH.Code ,
 CASE WHEN BRANCH.Code = '00000' AND OINV.DocCur = OADM.MainCurncy THEN N'สำนักงานใหญ่' 
@@ -75,10 +67,22 @@ SUM(CASE WHEN OINV.DocCur = 'THB' THEN INV1.LineTotal ELSE INV1.TotalFrgn END) O
 INV1.LineType,
 OINV.Address2,
 OSLP.SlpName,
-OINV.Printed
+OINV.Printed,
+INV1.Project,
+OCPR.Name,
+OCPR.Tel1,
+OCPR.E_MailL,
+INV12.StreetB,
+INV12.StreetNoB,
+INV12.BlockB,
+INV12.CityB,
+INV12.ZipCodeB,
+INV12.CountyB,
+INV12.CountryB
 
 FROM OINV
 INNER JOIN INV1 ON OINV.DocEntry = INV1.DocEntry
+INNER JOIN INV12 ON OINV.DocEntry = INV12.DocEntry
 LEFT JOIN NNM1 ON OINV.Series = NNM1.Series 
 LEFT JOIN OCRD ON OINV.CardCode = OCRD.CardCode
 LEFT JOIN OCPR ON OINV.CntctCode = OCPR.CntctCode
