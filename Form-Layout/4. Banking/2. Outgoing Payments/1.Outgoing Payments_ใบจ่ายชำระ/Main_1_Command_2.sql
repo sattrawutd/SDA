@@ -1,12 +1,4 @@
-﻿-- ============================================================
--- Report: 1.Outgoing Payments_ใบจ่ายชำระ.rpt
-Path:   4. Banking\2. Outgoing Payments\1.Outgoing Payments_ใบจ่ายชำระ.rpt
-Extracted: 2026-04-09 15:22:48
--- Source: Main Report
--- Table:  Command_2
--- ============================================================
-
-SELECT DISTINCT
+﻿SELECT DISTINCT
 CONCAT(OCPR.FirstName,' ',OCPR.LastName) AS 'Coontact',
 BRANCH.Code ,
 CASE WHEN BRANCH.Code = '00000' AND OVPM.DocCurr = OADM.MainCurncy THEN N'สำนักงานใหญ่' 
@@ -55,7 +47,12 @@ OVPM.DocEntry,
 OVPM.DocNum,
 OVPM.DocDate,
 OVPM.CardCode,
-OVPM.[Address],
+-- Split OVPM.[Address]
+CAST('<X>' + REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(OVPM.[Address], ''), '&', '&amp;'), '<', '&lt;'), CHAR(13)+CHAR(10), CHAR(13)), CHAR(10), CHAR(13)), CHAR(13), '</X><X>') + '</X>' AS XML).value('(/X)[1]', 'NVARCHAR(250)') AS 'AddressLine1',
+CAST('<X>' + REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(OVPM.[Address], ''), '&', '&amp;'), '<', '&lt;'), CHAR(13)+CHAR(10), CHAR(13)), CHAR(10), CHAR(13)), CHAR(13), '</X><X>') + '</X>' AS XML).value('(/X)[2]', 'NVARCHAR(250)') AS 'AddressLine2',
+CAST('<X>' + REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(OVPM.[Address], ''), '&', '&amp;'), '<', '&lt;'), CHAR(13)+CHAR(10), CHAR(13)), CHAR(10), CHAR(13)), CHAR(13), '</X><X>') + '</X>' AS XML).value('(/X)[3]', 'NVARCHAR(250)') AS 'AddressLine3',
+CAST('<X>' + REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(OVPM.[Address], ''), '&', '&amp;'), '<', '&lt;'), CHAR(13)+CHAR(10), CHAR(13)), CHAR(10), CHAR(13)), CHAR(13), '</X><X>') + '</X>' AS XML).value('(/X)[4]', 'NVARCHAR(250)') AS 'AddressLine4',
+CAST('<X>' + REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(OVPM.[Address], ''), '&', '&amp;'), '<', '&lt;'), CHAR(13)+CHAR(10), CHAR(13)), CHAR(10), CHAR(13)), CHAR(13), '</X><X>') + '</X>' AS XML).value('(/X)[5]', 'NVARCHAR(250)') AS 'AddressLine5',
 OVPM.CashAcct,
 OVPM.CreditSum,
 OVPM.TrsfrSum,
